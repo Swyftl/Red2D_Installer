@@ -1,9 +1,11 @@
-from distutils.command.install import install
-
-import github.Download
 from github import Github
 import requests
-from tkinter import *
+from customtkinter import *
+import threading
+
+def startDownload(item: int):
+    downloadThread = threading.Thread(target=lambda : DownloadItem(item))
+    downloadThread.start()
 
 def DownloadItem(item: int):
     print("starting install")
@@ -27,16 +29,17 @@ for release in repo.get_releases():
 
 print("Loaded Correctly")
 
-root = Tk()
+root = CTk()
+root.geometry("1280x720")
 
 root.title("Red2D Installer")
 
 clicked = StringVar()
 clicked.set(releases_tags[0])
 
-dropdown = OptionMenu(root, clicked, *releases_tags)
+dropdown = CTkOptionMenu(root, values=releases_tags, variable=clicked)
 
-install = Button(root, text="Install Selected Version", command= lambda: DownloadItem(releases_tags.index(clicked.get())))
+install = CTkButton(root, text="Install Selected Version", command= lambda: startDownload(releases_tags.index(clicked.get())))
 
 dropdown.pack()
 install.pack()
