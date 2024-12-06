@@ -1,10 +1,10 @@
 from github import Github
 import requests
-from customtkinter import *
-import threading
+from customtkinter import CTk, CTkButton, StringVar, CTkOptionMenu
+from threading import Thread
 
 def startDownload(item: int):
-    downloadThread = threading.Thread(target=lambda : DownloadItem(item))
+    downloadThread = Thread(target=lambda : DownloadItem(item))
     downloadThread.start()
 
 def DownloadItem(item: int):
