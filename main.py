@@ -1,5 +1,3 @@
-from tkinter.filedialog import FileDialog
-
 from github import Github
 import requests
 from tkinter import *
@@ -11,7 +9,7 @@ import os
 global selected_directory
 
 def startDownload(item: int):
-    downloadThread = Thread(target=lambda : DownloadItem(item))
+    downloadThread = Thread(target=lambda: DownloadItem(item))
     downloadThread.start()
 
 def DownloadItem(item: int):
@@ -46,6 +44,7 @@ def OpenSelector():
     projectLocation.insert(0, folder)
     selected_directory = folder
 
+
 releases = []
 releases_tags = []
 
@@ -72,7 +71,7 @@ SelectFile = Button(root, text="Select File Location", command=OpenSelector)
 
 dropdown = OptionMenu(root, clicked, str(releases_tags))
 
-install = Button(root, text="Install Selected Version", command= lambda: startDownload(releases_tags.index(clicked.get())))
+install = Button(root, text="Install Selected Version", command=lambda: startDownload(releases_tags.index(clicked.get())))
 
 projectLocation.pack()
 SelectFile.pack()
