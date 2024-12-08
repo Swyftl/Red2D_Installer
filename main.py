@@ -69,7 +69,7 @@ selected_directory = StringVar()
 projectLocation = Entry(root, textvariable=selected_directory)
 SelectFile = Button(root, text="Select File Location", command=OpenSelector)
 
-dropdown = OptionMenu(root, clicked, str(releases_tags))
+dropdown = OptionMenu(root, clicked, *releases_tags)
 
 install = Button(root, text="Install Selected Version", command=lambda: startDownload(releases_tags.index(clicked.get())))
 
